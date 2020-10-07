@@ -10,15 +10,15 @@ class Square extends React.Component{
     // React components can have state by setting this.state in their constructors. 
     // this.state should be considered as private to a React component that it’s defined in. Let’s store the current value of the Square in this.state, 
     // and change it when the Square is clicked.
-    constructor(props){
-        super(props);
-        this.state = {
-            value: null,
-        };
-    }
+    // constructor(props){
+    //     super(props);
+    //     this.state = {
+    //         value: null,
+    //     };
+    // }
     render(){
         return(
-        <button className="square" > {this.props.value}</button> //onClick={() => this.props.onClick}
+        <button className="square" onClick={() => this.props.onClick}> {this.props.value}</button> 
         );
     }
 }
