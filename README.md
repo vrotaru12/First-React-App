@@ -3,7 +3,7 @@ Before running the app the following prerequizites needs to be installed:
 1. Make sure you have a recent version of Node.js installed.
 2.Run
 ```bash
-  npx create-react-app  ### `the name of the folder in which you want to create app`
+  npx create-react-app   `the-name-of-the-folder-in-which-you-want-to-create-app`
  ```
 
 ## Available Scripts
