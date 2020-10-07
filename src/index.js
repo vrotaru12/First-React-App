@@ -2,23 +2,19 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
-class Square extends React.Component{
-    // we want the Square component to “remember” that it got clicked, 
-    //and fill it with an “X” mark.
-    //  To “remember” things, components use state.
 
-    // React components can have state by setting this.state in their constructors. 
-    // this.state should be considered as private to a React component that it’s defined in. Let’s store the current value of the Square in this.state, 
-    // and change it when the Square is clicked.
-    // constructor(props){
-    //     super(props);
-    //     this.state = {
-    //         value: null,
-    //     };
-    // }
+
+// When a Square is clicked, the onClick function provided by the Board is called. Here’s a review of how this is achieved:
+
+// 1. The onClick prop on the built-in DOM <button> component tells React to set up a click event listener.
+// 2. When the button is clicked, React will call the onClick event handler that is defined in Square’s render() method.
+// 3. This event handler calls this.props.onClick(). The Square’s onClick prop was specified by the Board.
+// 4. Since the Board passed onClick={() => this.handleClick(i)} to Square, the Square calls this.handleClick(i) when clicked.
+// 5. We have not defined the handleClick() method yet, so our code crashes. If you click a square now, you should see a red error screen saying something like “this.handleClick is not a function”.
+class Square extends React.Component{
     render(){
         return(
-        <button className="square" onClick={() => this.props.onClick}> {this.props.value}</button> 
+        <button className="square" onClick={() => this.props.onClick()}> {this.props.value}</button> 
         );
     }
 }
