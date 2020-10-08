@@ -1,12 +1,6 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-### Before running the app the following prerequizites needs to be installed:
-1. Make sure you have a recent version of Node.js installed.
-2. Run
-```bash
-  npx create-react-app   `the-name-of-the-folder-in-which-you-want-to-create-app`
- ```
-
-## Available Scripts
+# First React Application
+This is my first Tic-Tak-Toe Game made with React.
+## To run the application
 
 In the project directory, you can run:
 
