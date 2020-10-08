@@ -11,12 +11,12 @@ import './index.css';
 // 3. This event handler calls this.props.onClick(). The Square’s onClick prop was specified by the Board.
 // 4. Since the Board passed onClick={() => this.handleClick(i)} to Square, the Square calls this.handleClick(i) when clicked.
 // 5. We have not defined the handleClick() method yet, so our code crashes. If you click a square now, you should see a red error screen saying something like “this.handleClick is not a function”.
-class Square extends React.Component{
-    render(){
-        return(
-        <button className="square" onClick={() => this.props.onClick()}> {this.props.value}</button> 
-        );
-    }
+function Square(props) {
+    return(
+        <button className="square" onClick={props.onClick}> 
+            {props.value}
+        </button> 
+    );
 }
 // To collect data from multiple children, or to have two child components communicate 
 // with each other, you need to declare the shared state in their parent component instead.
@@ -26,21 +26,26 @@ class Board extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            squares: Array(9).fill(null)
+            squares: Array(9).fill(null),
+            xIsNext: true,
         };
     }
     handleClick(i){
         const squares = this.state.squares.slice();
-        squares[i] = 'X';
-        this.setState({squares: squares})
+        squares[i] = this.state.xIsNext? 'X':'O';
+        this.setState({
+            squares: squares,
+            xIsNext: !this.state.xIsNext,
+        })
     }
+    // Square components are now controlled components. The Board has full control over them.
     renderSquare(i) {
         return <Square value={this.state.squares[i]} onClick={() => this.handleClick(i)}/>;
       }
     
 
     render(){
-        const status = 'Next player: X';
+        const status = 'Next player: '+ (this.state.xIsNext? 'X':'O');
         return(
             <div>
                 <div className="status">{status}</div>
