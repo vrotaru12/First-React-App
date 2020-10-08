@@ -60,11 +60,13 @@ class Game extends React.Component{
                 squares: Array(9).fill(null),
             }],
             xIsNext: true,
+            stepNumber: 0,
         }
     }
 
     handleClick(i){
-        const history = this.state.history;
+        //history's value ensures that if we “go back in time” and then make a new move from that point, we throw away all the “future” history that would now become incorrect.
+        const history = this.state.history.slice(0, this.state.stepNumber + 1); 
         const current = history[history.length - 1];
         const squares = current.squares.slice();
         if (calculateWinner(squares) || squares[i]){
@@ -75,17 +77,26 @@ class Game extends React.Component{
             history: history.concat([{
                 squares: squares,
             }]),
+            stepNumber: history.length, //This ensures we don’t get stuck showing the same move after a new one has been made.
             xIsNext: !this.state.xIsNext,
         })
     }
+
+    jumpTo(step){
+        this.setState ({
+            xIsNext: (step % 2) === 0,
+            stepNumber: step 
+        })
+    }
+
     render() {
         const history = this.state.history;
-        const current = history[history.length - 1];
+        const current = history[this.state.stepNumber]; //rendering the currently selected move according to stepNumber
         const winner = calculateWinner(current.squares);
         const moves = history.map((step, move) => {
             const desc = move ? 'Move to Step '+ move : 'Restart ';
             return (
-                <li>
+                <li key={move}>
                     <button onClick={() => this.jumpTo(move)}>{desc}</button>
                 </li>
             );
